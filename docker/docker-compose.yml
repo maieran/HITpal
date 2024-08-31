@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword   # Root-Passwort für MySQL
+      MYSQL_DATABASE: mydatabase          # Name der zu erstellenden Datenbank
+      MYSQL_USER: myuser                  # Benutzername für die Datenbank
+      MYSQL_PASSWORD: mypassword          # Passwort für den Benutzer
+    ports:
+      - "3306:3306"                       # Portweiterleitung: Host-Port : Container-Port
+    volumes:
+      - mysql-data:/var/lib/mysql         # Persistente Speicherung der Daten
+
+volumes:
+  mysql-data:
