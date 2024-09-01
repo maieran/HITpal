@@ -1,11 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { connectDB } = require('./config/database'); // Stellen Sie sicher, dass die Funktion hier importiert wird
-
+const userRoutes = require('./routes/userRoutes')
 const app = express();
 
 // Middleware zum Parsen von JSON-Anfragen
-app.use(express.json());
+//app.use(express.json());
+app.use(bodyParser.json());
+
+app.use('/api/users', userRoutes)
 
 // Definieren Sie Ihre Routen hier
 app.get('/', (req, res) => {
