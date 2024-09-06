@@ -24,20 +24,6 @@ router.post('/', async (req, res) => {
 
 // Route zum Abrufen des Benutzerprofils (erfordert Authentifizierung)
 router.get('/profile', authenticateToken, getUserProfile);
-/*router.get('/profile', authenticateToken, async (req, res) => {
-  try {
-    const user = await User.findByPk(req.user.userId, { attributes: { exclude: ['password'] } });
-    
-    if (!user) {
-      return res.status(404).json({ error: 'Benutzer nicht gefunden' });
-    }
-
-    res.status(200).json(user);
-      
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});*/
 
 // Route zum Abrufen aller Benutzer (erfordert Authentifizierung)
 router.get('/', authenticateToken, async (req, res) => {
