@@ -9,10 +9,12 @@ app.use(express.json());
 // Importieren der Routen
 const userRoutes = require('./routes/userRoutes');
 const trainingRoutes = require('./routes/trainingRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Routen
 app.use('/api/users', userRoutes);
 app.use('/api/trainings', trainingRoutes);
+app.use('/api/auth', authRoutes);
 
 // Verbindung zur Datenbank herstellen
 connectDB().then(() => {

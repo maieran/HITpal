@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { connectDB } = require('./config/database'); // Stellen Sie sicher, dass die Funktion hier importiert wird
+require('dotenv').config(); // Diese Zeile muss hinzugefügt werden, wenn sie noch nicht existiert.
+
 const userRoutes = require('./routes/userRoutes')
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // Middleware zum Parsen von JSON-Anfragen
@@ -9,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/api/users', userRoutes)
+app.use('/api/auth', authRoutes);
 
 // Definieren Sie Ihre Routen hier
 app.get('/', (req, res) => {
