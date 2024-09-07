@@ -1,5 +1,5 @@
-// src/Register.js
 import React, { useState } from 'react';
+import '../styles/Register.css'; // Importiere deine CSS-Datei
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -26,9 +26,9 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Registrieren</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h1>Registrieren</h1>
         <div>
           <label>Benutzername:</label>
           <input
@@ -57,8 +57,8 @@ const Register = () => {
           />
         </div>
         <button type="submit">Registrieren</button>
+        {message && <p>{message}</p>}
       </form>
-      {message && <p>{message}</p>}
     </div>
   );
 };

@@ -1,6 +1,6 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Login.css';  // Importiere deine CSS-Datei
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -30,9 +30,9 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1>Login</h1>
         <div>
           <label>Email:</label>
           <input
@@ -52,8 +52,8 @@ const Login = () => {
           />
         </div>
         <button type="submit">Einloggen</button>
+        {error && <p>{error}</p>}
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
