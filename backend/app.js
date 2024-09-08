@@ -13,7 +13,7 @@ const authRoutes = require('./routes/authRoutes');
 
 // Routen
 app.use('/api/users', userRoutes);
-app.use('/api/trainings', trainingRoutes);
+app.use('/api/training', trainingRoutes);
 app.use('/api/auth', authRoutes);
 
 // Verbindung zur Datenbank herstellen
