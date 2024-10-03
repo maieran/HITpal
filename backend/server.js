@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes');
+const trainingRoutes = require('./routes/trainingRoutes');
 const app = express();
 
 // Nutzen von Cross-Origin Resource Sharing, 
@@ -20,10 +21,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/users', require('./routes/userRoutes'));
-
+//app.use('/api/training', require('./routes/trainingRoutes'));
 
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes);
+app.use('/api/training', trainingRoutes);
 
 
 
