@@ -40,14 +40,29 @@ router.post(
 );
 
 // Route: Alle Trainings eines Benutzers anzeigen
-router.get('/', authenticateToken, async (req, res) => {
+/* router.get('/', authenticateToken, async (req, res) => {
   try {
     const trainings = await Training.findAll({ where: { userId: req.user.id } });
     res.json(trainings);
   } catch (error) {
     res.status(500).json({ message: 'Fehler beim Abrufen der Trainings', error });
   }
+}); */
+
+// Route: Alle Trainings eines Benutzers anzeigen
+router.get('/', authenticateToken, async (req, res) => {
+  try {
+    console.log('req.user:', req.user); // Debugging: Ausgabe des authentifizierten Benutzers
+
+    const trainings = await Training.findAll({ where: { userId: req.user.userId } }); // Stelle sicher, dass du "userId" statt "id" verwendest
+    res.json(trainings);
+  } catch (error) {
+    console.error("Fehler beim Abrufen der Trainings:", error); // Ausführlichere Fehlermeldung
+    res.status(500).json({ message: 'Fehler beim Abrufen der Trainings', error });
+  }
 });
+
+
 
 // Route: Training aktualisieren
 router.put(
@@ -69,7 +84,7 @@ router.put(
     const { name, repetitions, sets, weight, duration } = req.body;
     try {
       const training = await Training.findByPk(req.params.id);
-      if (!training || training.userId !== req.user.id) {
+      if (!training || training.userId !== req.user.userId) {
         return res.status(404).json({ message: 'Training nicht gefunden' });
       }
 
@@ -84,6 +99,7 @@ router.put(
 
       res.json(training);
     } catch (error) {
+      console.log("Fehler beim Aktualisieren der Trainings:", error);
       res.status(500).json({ message: 'Fehler beim Aktualisieren des Trainings', error });
     }
   }
@@ -93,13 +109,14 @@ router.put(
 router.delete('/:id', authenticateToken, async (req, res) => {
   try {
     const training = await Training.findByPk(req.params.id);
-    if (!training || training.userId !== req.user.id) {
+    if (!training || training.userId !== req.user.userId) {
       return res.status(404).json({ message: 'Training nicht gefunden' });
     }
 
     await training.destroy();
     res.json({ message: 'Training erfolgreich gelöscht' });
   } catch (error) {
+    console.log("Fehler beim Löschen der Trainings:", error);
     res.status(500).json({ message: 'Fehler beim Löschen des Trainings', error });
   }
 });
